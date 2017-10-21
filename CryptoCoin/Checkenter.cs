@@ -103,7 +103,7 @@ namespace CryptoCoin
                 {
                       string hash = GetMd5Hash(md5Hash, password);
                       secondarypass = hash;
-                    File.AppendAllText(path, "\n");
+                    //File.AppendAllText(path, "   ");
                     lineChanger(hash, path, 2);
                 }                
                 return true;                

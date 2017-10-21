@@ -41,68 +41,73 @@ namespace CryptoCoin
             
             foreach (var item in alldat)
             {
-                
-                try
+                if (item != null)
                 {
-                    item.name = newencrypt.DecryptStringAES(item.name, "lamvu");
-                    item.currency = newencrypt.DecryptStringAES(item.currency, "lamvu");
-                    item.publicaddress = newencrypt.DecryptStringAES(item.publicaddress, "lamvu");
-                    item.privateaddress = newencrypt.DecryptStringAES(item.privateaddress, "lamvu");
-                    item.notes = newencrypt.DecryptStringAES(item.notes, "lamvu");                   
+                    try
+                    {
+                        item.name = newencrypt.DecryptStringAES(item.name, "lamvu");
+                        item.currency = newencrypt.DecryptStringAES(item.currency, "lamvu");
+                        item.publicaddress = newencrypt.DecryptStringAES(item.publicaddress, "lamvu");
+                        item.privateaddress = newencrypt.DecryptStringAES(item.privateaddress, "lamvu");
+                        item.notes = newencrypt.DecryptStringAES(item.notes, "lamvu");
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    Detailscontent dt = new Detailscontent(item, ++i);
+                    var destailbtn = new Button();
+                    destailbtn.Text = "*";
+                    destailbtn.Height = 25;
+                    destailbtn.FlatStyle = FlatStyle.Flat;
+                    destailbtn.Click += (s, e) =>
+                    {
+                        dt.ShowDialog();
+                        isenter.loadData();
+                        datachange();
+                    };
+                    Label num1 = new Label();
+                    num1.Text = (i - 2) + ".";
+                    num1.TextAlign = ContentAlignment.BottomCenter;
+                    num1.AutoSize = true;
+
+                    var btnpublic = new Button();
+                    btnpublic.Text = ">";
+                    btnpublic.TextAlign = ContentAlignment.TopCenter;
+                    btnpublic.Height = 25;
+                    btnpublic.FlatStyle = FlatStyle.Flat;
+                    btnpublic.Click += (s, e) =>
+                    {
+                        MessageBox.Show("Public Address : " + item.publicaddress);
+                    };
+
+                    var btnprivate = new Button();
+                    btnprivate.Text = ">";
+                    btnprivate.TextAlign = ContentAlignment.TopCenter;
+                    btnprivate.Height = 25;
+                    btnprivate.FlatStyle = FlatStyle.Flat;
+                    btnprivate.Click += (s, e) =>
+                    {
+                        MessageBox.Show("Private Address : " + item.privateaddress);
+                    };
+
+                    TextBox nametx = new TextBox();
+                    nametx.Width = 160;
+                    nametx.ReadOnly = true;
+                    nametx.Text = item.name;
+                    TextBox currtx = new TextBox();
+                    currtx.Text = item.currency;
+                    currtx.ReadOnly = true;
+
+
+                    // add content to panel
+
+                    flowLayoutPanel1.Controls.Add(destailbtn);
+                    flowLayoutPanel1.Controls.Add(num1);
+                    flowLayoutPanel1.Controls.Add(nametx);
+                    flowLayoutPanel1.Controls.Add(currtx);
+                    flowLayoutPanel1.Controls.Add(btnpublic);
+                    flowLayoutPanel1.Controls.Add(btnprivate);
                 }
-                catch (Exception)
-                {  
-                }
-                Detailscontent dt = new Detailscontent(item, ++i);
-                var destailbtn = new Button();
-                destailbtn.Text = "*";
-                destailbtn.Height = 25;
-                destailbtn.FlatStyle = FlatStyle.Flat;
-                destailbtn.Click += (s, e) => {
-                    dt.ShowDialog();
-                    isenter.loadData();
-                    datachange();
-                };
-                Label num1 = new Label();
-                num1.Text = (i - 2) + ".";
-                num1.TextAlign = ContentAlignment.BottomCenter;
-                num1.AutoSize = true;
-
-                var btnpublic = new Button();
-                btnpublic.Text = ">";
-                btnpublic.TextAlign = ContentAlignment.TopCenter;
-                btnpublic.Height = 25;
-                btnpublic.FlatStyle = FlatStyle.Flat;
-                btnpublic.Click += (s, e) => {
-                    MessageBox.Show("Public Address : " + item.publicaddress);
-                };
-
-                var btnprivate = new Button();
-                btnprivate.Text = ">";
-                btnprivate.TextAlign = ContentAlignment.TopCenter;
-                btnprivate.Height = 25;
-                btnprivate.FlatStyle = FlatStyle.Flat;
-                btnprivate.Click += (s, e) => {
-                    MessageBox.Show("Private Address : " + item.privateaddress);
-                };
-
-                TextBox nametx = new TextBox();
-                nametx.Width = 160;
-                nametx.ReadOnly = true;
-                nametx.Text = item.name;
-                TextBox currtx = new TextBox();
-                currtx.Text = item.currency;
-                currtx.ReadOnly = true;
-
-
-                // add content to panel
-
-                flowLayoutPanel1.Controls.Add(destailbtn);
-                flowLayoutPanel1.Controls.Add(num1);
-                flowLayoutPanel1.Controls.Add(nametx);
-                flowLayoutPanel1.Controls.Add(currtx);
-                flowLayoutPanel1.Controls.Add(btnpublic);
-                flowLayoutPanel1.Controls.Add(btnprivate);
 
             }
         }

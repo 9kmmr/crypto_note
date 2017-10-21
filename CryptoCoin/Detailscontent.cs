@@ -16,18 +16,21 @@ namespace CryptoCoin
     public partial class Detailscontent : Form
     {
         public contents thiscontent;
-        int index = 0;
+       public int index = 0;
         // LOADING DATA FROM MAIN PROGRAM
         public Detailscontent(contents details,int index_data)
         {
             InitializeComponent();
             thiscontent = details;
             index = index_data;
-            nametxt.Text = thiscontent.name;
-            currencytxt.Text = thiscontent.currency;
-            publictxt.Text = thiscontent.publicaddress;
-            privatetxt.Text = thiscontent.privateaddress;
-            notetxt.Text = thiscontent.notes;
+            if (thiscontent != null)
+            {
+                nametxt.Text = thiscontent.name;
+                currencytxt.Text = thiscontent.currency;
+                publictxt.Text = thiscontent.publicaddress;
+                privatetxt.Text = thiscontent.privateaddress;
+                notetxt.Text = thiscontent.notes;
+            }
         }
 
 
