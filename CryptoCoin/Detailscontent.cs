@@ -63,14 +63,28 @@ namespace CryptoCoin
         private void Update()
         {
             Checkenter checkenter = new Checkenter();
-            thiscontent.name = nametxt.Text;
-            thiscontent.currency = currencytxt.Text;
-            thiscontent.publicaddress = publictxt.Text;
-            thiscontent.privateaddress = privatetxt.Text;
-            thiscontent.notes = notetxt.Text;
+            cryptdata newcrypt = new cryptdata();
+            thiscontent.name = "";
+            thiscontent.currency = "";
+            thiscontent.publicaddress = "";
+            thiscontent.privateaddress = "";
+            thiscontent.notes = "";
+            try
+            {
+                thiscontent.name = cryptdata.EncryptStringAES(nametxt.Text, "lamvu");
+                thiscontent.currency = cryptdata.EncryptStringAES(currencytxt.Text, "lamvu");
+                thiscontent.publicaddress = cryptdata.EncryptStringAES(publictxt.Text, "lamvu");
+                thiscontent.privateaddress = cryptdata.EncryptStringAES(privatetxt.Text, "lamvu");
+                thiscontent.notes = cryptdata.EncryptStringAES(notetxt.Text, "lamvu");
+                
+            }
+            catch (Exception)
+            { 
+            }
             string json = JsonConvert.SerializeObject(thiscontent);
             checkenter.lineChanger(json, checkenter.path, index);
-            
+
+
         }
         // DELETE BUTTON AND CONFIRM
         private void btndelete_Click(object sender, EventArgs e)

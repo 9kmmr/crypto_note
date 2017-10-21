@@ -25,6 +25,8 @@ namespace CryptoCoin
             UserClosing = false;
             InitializeComponent();
             isenter = checkenterthis;
+            // receiver the hint value
+            hintval.Text = "Hint : "+ File.ReadAllText(hintpath);
 
         }
        
@@ -124,11 +126,7 @@ namespace CryptoCoin
             UserClosing = false;
            
         }
-        // receiver the hint value
-        private void hintbtn_Click(object sender, EventArgs e)
-        {
-            hintval.Text = File.ReadAllText(hintpath);
-        }
+        
 
         private void textBox1_Enter(object sender, EventArgs e)
         {

@@ -18,6 +18,8 @@ namespace CryptoCoin
         string hintpath = Path.GetDirectoryName(Application.ExecutablePath) + "/HintData.DAT";
         public  string primarypass = "";
         public  string secondarypass = "";
+
+
         // FIRST LOAD THE DATA OF FILE AND GET THE PASSWORD
         public void loadData()
         {
@@ -25,7 +27,7 @@ namespace CryptoCoin
             {
                 using (StreamWriter outputFile = new StreamWriter(hintpath))
                 {
-                    outputFile.Write(" ");
+                    outputFile.Write("1111");
                 }
             }
             if (File.Exists(path))
@@ -42,18 +44,12 @@ namespace CryptoCoin
                     else
                     {
                         is_firstentersec = false;
-                    }
-                    if (primarypass.Equals(".")) is_firstenterpri = true;
-                    else
-                    {
-                        is_firstenterpri = false;                     
-                    }
+                    }                    
                 }
                 else
                 {
                     is_firstenterpri = true;
-                }
-               
+                }               
             }
             else
             {
@@ -62,9 +58,16 @@ namespace CryptoCoin
                 // Open the stream and read it back.
                 using (StreamWriter outputFile = new StreamWriter(path))
                 {
-                    outputFile.WriteLine(".");
+                    using (MD5 md5Hash = MD5.Create())
+                    {
+                        string hash = GetMd5Hash(md5Hash, "1111");
+                        outputFile.WriteLine(hash);
+                        primarypass = hash;
+                    }
+                    
                 }
-                is_firstenterpri = true;
+                File.AppendAllText(path, ".\n");
+                is_firstenterpri = false;
                 is_firstentersec = true;
             }
         }
@@ -150,6 +153,7 @@ namespace CryptoCoin
         // GET ALL DATA IN FILE
          public List<string> getdatafile()
         {
+           
             IEnumerable<string> line = File.ReadLines(path).Skip(2);
             return new List<string>(line);
         }
@@ -199,6 +203,9 @@ namespace CryptoCoin
                 return false;
             }
         }
+
+        // read data and decrypt
+       
 
     }
 }

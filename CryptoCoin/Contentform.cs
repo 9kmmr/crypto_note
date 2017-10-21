@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Linq;
+using System.Security.Cryptography;
+
 namespace CryptoCoin
 {
     public partial class Contentform : Form
     {
         public Checkenter isenter;
+        public cryptdata newencrypt = new cryptdata();
         public Contentform(Checkenter thisenter)
         {
             InitializeComponent();
@@ -25,6 +28,8 @@ namespace CryptoCoin
         {
             List<string> dataall = isenter.getdatafile();
             List<contents> alldat = deserialdata(dataall);
+            
+           
             int i = 2;
             List<Control> listControls = flowLayoutPanel1.Controls.Cast<Control>().ToList();
 
@@ -36,6 +41,18 @@ namespace CryptoCoin
             
             foreach (var item in alldat)
             {
+                
+                try
+                {
+                    item.name = newencrypt.DecryptStringAES(item.name, "lamvu");
+                    item.currency = newencrypt.DecryptStringAES(item.currency, "lamvu");
+                    item.publicaddress = newencrypt.DecryptStringAES(item.publicaddress, "lamvu");
+                    item.privateaddress = newencrypt.DecryptStringAES(item.privateaddress, "lamvu");
+                    item.notes = newencrypt.DecryptStringAES(item.notes, "lamvu");                   
+                }
+                catch (Exception)
+                {  
+                }
                 Detailscontent dt = new Detailscontent(item, ++i);
                 var destailbtn = new Button();
                 destailbtn.Text = "*";
@@ -47,12 +64,12 @@ namespace CryptoCoin
                     datachange();
                 };
                 Label num1 = new Label();
-                num1.Text = (i-2) + ".";
+                num1.Text = (i - 2) + ".";
                 num1.TextAlign = ContentAlignment.BottomCenter;
                 num1.AutoSize = true;
 
                 var btnpublic = new Button();
-                btnpublic.Text = "˅";
+                btnpublic.Text = ">";
                 btnpublic.TextAlign = ContentAlignment.TopCenter;
                 btnpublic.Height = 25;
                 btnpublic.FlatStyle = FlatStyle.Flat;
@@ -61,7 +78,7 @@ namespace CryptoCoin
                 };
 
                 var btnprivate = new Button();
-                btnprivate.Text = "˅";
+                btnprivate.Text = ">";
                 btnprivate.TextAlign = ContentAlignment.TopCenter;
                 btnprivate.Height = 25;
                 btnprivate.FlatStyle = FlatStyle.Flat;
@@ -86,8 +103,10 @@ namespace CryptoCoin
                 flowLayoutPanel1.Controls.Add(currtx);
                 flowLayoutPanel1.Controls.Add(btnpublic);
                 flowLayoutPanel1.Controls.Add(btnprivate);
+
             }
         }
+        
         // DESERIAL DATA FROM JSON TO OBJECT
         public List<contents> deserialdata(List<string>  dataall)
         {

@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.hintbtn = new System.Windows.Forms.Button();
             this.hintval = new System.Windows.Forms.Label();
             this.passchange = new System.Windows.Forms.Button();
             this.enter = new System.Windows.Forms.Button();
@@ -73,27 +72,16 @@
             this.textBox1.UseSystemPasswordChar = true;
             this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
             // 
-            // hintbtn
-            // 
-            this.hintbtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.hintbtn.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hintbtn.Location = new System.Drawing.Point(163, 188);
-            this.hintbtn.Name = "hintbtn";
-            this.hintbtn.Size = new System.Drawing.Size(53, 22);
-            this.hintbtn.TabIndex = 3;
-            this.hintbtn.Text = "Hint : ";
-            this.hintbtn.UseVisualStyleBackColor = true;
-            this.hintbtn.Click += new System.EventHandler(this.hintbtn_Click);
-            // 
             // hintval
             // 
             this.hintval.AutoSize = true;
+            this.hintval.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hintval.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hintval.Location = new System.Drawing.Point(231, 192);
             this.hintval.Name = "hintval";
-            this.hintval.Size = new System.Drawing.Size(37, 15);
+            this.hintval.Size = new System.Drawing.Size(54, 17);
             this.hintval.TabIndex = 4;
-            this.hintval.Text = "          ";
+            this.hintval.Text = "Hint :     ";
             // 
             // passchange
             // 
@@ -150,7 +138,6 @@
             this.Controls.Add(this.enter);
             this.Controls.Add(this.passchange);
             this.Controls.Add(this.hintval);
-            this.Controls.Add(this.hintbtn);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -171,7 +158,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button hintbtn;
         private System.Windows.Forms.Label hintval;
         private System.Windows.Forms.Button passchange;
         private System.Windows.Forms.Button enter;
