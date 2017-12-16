@@ -13,7 +13,7 @@ namespace CryptoCoin
         //While an app specific salt is not the best practice for
         //password based encryption, it's probably safe enough as long as
         //it is truly uncommon. Also too much work to alter this answer otherwise.
-        private static byte[] _salt = Encoding.ASCII.GetBytes("lamvu208");
+        private static byte[] _salt = Encoding.ASCII.GetBytes("lamvu28");
 
         /// <summary>
         /// Encrypt the given string using AES.  The string can be decrypted using 
